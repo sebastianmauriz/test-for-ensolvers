@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.testMauriz.models.entity.Folder;
-import com.app.testMauriz.models.service.FolderService;
+import com.app.testMauriz.models.entity.Item;
+import com.app.testMauriz.models.service.ItemService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "app/folder")
-public class FolderController {
+@RequestMapping(path = "app/item")
+public class ItemController {
 
 	@Autowired
-	private FolderService service; 
+	private ItemService service; 
 	
 	@GetMapping
 	public ResponseEntity<?> list(){
@@ -34,7 +34,7 @@ public class FolderController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?>view(@PathVariable Long id){
-		Optional<Folder> o = service.findById(id);
+		Optional<Item> o = service.findById(id);
 		if(o.isEmpty()) {
 		return	ResponseEntity.notFound().build();
 		}
@@ -43,21 +43,21 @@ public class FolderController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> save (@RequestBody Folder folder){
-		Folder folderDb = service.save(folder);
-		return ResponseEntity.status(HttpStatus.CREATED).body(folderDb);
+	public ResponseEntity<?> save (@RequestBody Item item){
+		Item itemDb = service.save(item);
+		return ResponseEntity.status(HttpStatus.CREATED).body(itemDb);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> edit (@RequestBody Folder folder, @PathVariable Long id){
-		Optional<Folder> o = service.findById(id);
+	public ResponseEntity<?> edit (@RequestBody Item item, @PathVariable Long id){
+		Optional<Item> o = service.findById(id);
 		if(o.isEmpty()) {
 		return ResponseEntity.notFound().build();
 		}
 		
-		Folder folderDb = o.get();
-		folderDb.setName(folder.getName());
-		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(folderDb));
+		Item itemDb = o.get();
+		itemDb.setName(item.getName());
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(itemDb));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -66,10 +66,4 @@ public class FolderController {
 		return ResponseEntity.noContent().build();
 	}
 	
-
-
-
 }
-
-
-
