@@ -2,7 +2,6 @@ package com.app.testMauriz.models.service;
 
 import java.util.Optional;
 
-import com.app.testMauriz.models.entity.Folder;
 import com.app.testMauriz.models.entity.Item;
 
 public interface ItemService {

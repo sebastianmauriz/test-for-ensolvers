@@ -5,13 +5,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import org.springframework.stereotype.Service;
 import com.app.testMauriz.models.entity.Item;
 import com.app.testMauriz.models.repository.ItemRepository;
 
+@Service
 public class ItemServiceImplement implements ItemService {
 
-	@Autowired
+	@Autowired(required=true)
 	private ItemRepository repository;
 	
 	@Override
