@@ -10,10 +10,15 @@ import { Item } from 'src/app/Entity/Item';
 })
 export class HomeComponent implements OnInit {
 
-//private router: Router,    private activatedRoute:ActivatedRoute
-  itemsArray:any[]=[];
+//    private activatedRoute:ActivatedRoute
+  //item:Item = new Item;
+  itemsArray:Item[]=[];
+  selectItem:Item = new Item;
+  itemToEdit!:Item;
+  protected redirect!: string;
   constructor(
-    private itemService: ItemService) { }
+    private itemService: ItemService,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.itemService.list().subscribe(items =>{
@@ -22,4 +27,17 @@ export class HomeComponent implements OnInit {
     console.log(this.itemsArray);
   }
 
+  public addItem(): void{
+    this.itemService.save(this.selectItem).subscribe(it =>{
+      this.itemsArray.push(it);
+    })
+    
+  }
+
+  public editItem(){
+this.itemService.edit(this.itemToEdit).subscribe(it=>{
+  this.itemsArray.push(it);
+})
+  }
+  
 }
