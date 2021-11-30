@@ -15,6 +15,6 @@ export class ItemService extends CommonService<Item>{
     super(http);
    }
 
-   protected override baseEndPoint = BASE_ENDPOINT + '/item';
+   protected override baseEndPoint = BASE_ENDPOINT + '';
 
 }

@@ -11,16 +11,10 @@ export abstract class CommonService<E extends Item> {
 
   constructor(protected http: HttpClient) { }
 
-public listar(): Observable<E[]>{
+public list(): Observable<E[]>{
   return this.http.get<E[]>(this.baseEndPoint);
 }
 
-public lisPage(page: string, size: string): Observable<any>{
-  const params = new HttpParams()
-  .set('page', page)
-  .set('size', size);
-  return this.http.get<any>(`${this.baseEndPoint}/paged`,{params: params})
-}
 
 public view(id: number): Observable<E>{
   return this.http.get<E>(this.baseEndPoint + '/' + id);
